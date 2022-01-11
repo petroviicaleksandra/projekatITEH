@@ -5,15 +5,62 @@ import Header from "./components/front/Header";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Proizvodi from "./components/front/Proizvodi";
 import Korpa from "./components/front/Korpa";
+import { useState } from "react";
 
 function App() {
   const { proizvodi } = data;
+  const [korpa, setKorpa] = useState([]);
+
+  const dodajProizvod = (proizvod) => {
+    const Postoji = korpa.find((pr) => pr.id === proizvod.id);
+
+    if (Postoji) {
+      setKorpa(
+        korpa.map((pr) =>
+          pr.id === proizvod.id
+            ? {
+                ...Postoji,
+                kolicina: Postoji.kolicina + 1,
+              }
+            : pr
+        )
+      );
+    } else {
+      setKorpa([...korpa, { ...proizvod, kolicina: 1 }]);
+    }
+  };
+  const obrisiProizvod = (proizvod) => {
+    const Postoji = korpa.find((pr) => pr.id === proizvod.id);
+    if (Postoji.kolicina === 1) {
+      setKorpa(korpa.filter((pr) => pr.id !== proizvod.id));
+    } else {
+      setKorpa(
+        korpa.map((pr) =>
+          pr.id === proizvod.id
+            ? { ...Postoji, kolicina: Postoji.kolicina - 1 }
+            : pr
+        )
+      );
+    }
+  };
   return (
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<Proizvodi pr={proizvodi} />} />
-        <Route path="/cart" element={<Korpa />} />
+        <Route
+          path="/"
+          element={<Proizvodi pr={proizvodi} dodajProizvod={dodajProizvod} />}
+        />
+        <Route
+          path="/cart"
+          element={
+            <Korpa
+              korpa={korpa}
+              dodajProizvod={dodajProizvod}
+              obrisiProizvod={obrisiProizvod}
+            />
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

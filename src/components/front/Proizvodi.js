@@ -1,6 +1,6 @@
 import React from "react";
 
-const Proizvodi = ({ pr }) => {
+const Proizvodi = ({ pr, dodajProizvod }) => {
   return (
     <div className="products">
       {pr.map((proizvod) => (
@@ -17,7 +17,12 @@ const Proizvodi = ({ pr }) => {
           </div>
           <div className="product-price">{proizvod.cena} RSD</div>
           <div>
-            <button className="product-add-button">Kupi</button>
+            <button
+              className="product-add-button"
+              onClick={() => dodajProizvod(proizvod)}
+            >
+              Kupi
+            </button>
           </div>
         </div>
       ))}
