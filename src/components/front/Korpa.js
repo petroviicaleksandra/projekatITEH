@@ -1,13 +1,18 @@
 import React from "react";
+import Button from "./Button";
 
 const Korpa = ({ korpa, dodajProizvod, obrisiProizvod }) => {
   const ukupnaCena = korpa.reduce(
     (cena, pr) => cena + pr.kolicina * pr.cena,
     0
   );
+  const imeKlase = "cart-items-add";
+  const imeKlase2 = "cart-items-remove";
   return (
     <div className="cart-items">
-      <div className="cart-items-header">Korpa</div>
+      <div className="cart-items-header">
+        <h3>Korpa</h3>
+      </div>
       {korpa.length === 0 && (
         <div className="cart-items-empty">Nema proizvoda u korpi.</div>
       )}
@@ -25,18 +30,19 @@ const Korpa = ({ korpa, dodajProizvod, obrisiProizvod }) => {
               {proizvod.kolicina} * {proizvod.cena} RSD
             </div>
             <div className="cart-items-function">
-              <button
-                className="cart-items-add"
-                onClick={() => dodajProizvod(proizvod)}
-              >
-                +
-              </button>
-              <button
-                className="cart-items-remove"
-                onClick={() => obrisiProizvod(proizvod)}
-              >
-                -
-              </button>
+              <Button
+                label="+"
+                imek={imeKlase}
+                handleClick={dodajProizvod}
+                pr={proizvod}
+              />
+
+              <Button
+                label="-"
+                imek={imeKlase2}
+                handleClick={obrisiProizvod}
+                pr={proizvod}
+              />
             </div>
           </div>
         ))}
