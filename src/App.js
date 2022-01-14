@@ -43,9 +43,9 @@ function App() {
       );
     }
   };
+  const imek = "";
   return (
     <BrowserRouter>
-      <Header />
       <Routes>
         <Route
           path="/"

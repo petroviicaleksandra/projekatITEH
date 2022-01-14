@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ labs }) => {
   return (
     <header className="header">
       <div>
@@ -15,7 +15,7 @@ const Header = () => {
         </ul>
         <ul>
           <li>
-            <Link to="/signup">Uloguj se</Link>
+            <Link to="/signup">{labs}</Link>
           </li>
         </ul>
         <ul>
