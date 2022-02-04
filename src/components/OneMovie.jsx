@@ -1,10 +1,11 @@
 import React from "react";
 
-import { BsPlusLg, BsDashLg } from "react-icons/bs";
+import { TiPlus, TiMinus } from "react-icons/ti";
 
-function OneMovie({ movie, onAdd, inCart }) {
+
+function OneMovie({ movie, onAdd, onRemove, inCart }) {
   const stil = { margin: 1 + "em", borderStyle: "dotted" };
-  const stilSlika = {height: 200}
+  const stilSlika = {height: 310}
     return (
     <div className={inCart === 1 ? "card" : "card-cart"} style={stil}>
       <img
@@ -23,10 +24,13 @@ function OneMovie({ movie, onAdd, inCart }) {
             className="btn"
             onClick={() => onAdd(movie.title, movie.id)}
           >
-            <BsPlusLg />
+            <TiPlus />
           </button>
-          <button className="btn">
-            <BsDashLg />
+          <button className="btn"
+         onClick={() => onRemove(movie.title, movie.id)}
+
+          >
+            <TiMinus />
           </button>
         </>
       ) : (

@@ -5,7 +5,7 @@ const Cart = ({ movies }) => {
     <div className="cart-container">
       <h3>Kupljene su karte za filmove:</h3>
       {movies.map((mov) => (
-        <OneMovie movie={mov} image={mov.imgUrl} key={mov.id} inCart={0} />
+        <OneMovie movie={mov} image={mov.imageLink} key={mov.id} inCart={0} />
       ))}
     </div>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { BsCartFill } from "react-icons/bs";
+import { BiMoviePlay } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
 function NavBar({ cartNum }) {
@@ -7,7 +7,7 @@ function NavBar({ cartNum }) {
     <div className="navBar">
       <Link to="/">E-bioskop</Link>
       <Link to="/cart" className="cart-items">
-        <BsCartFill />
+        <BiMoviePlay />
         <p className="cart-num">{cartNum}</p>
       </Link>
     </div>

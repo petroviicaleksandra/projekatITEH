@@ -79,13 +79,42 @@ function App() {
     refreshCart();
     
   }
+  function remove (title,id) {
+
+    console.log("remove");
+
+    movies.forEach((mov) => {
+
+      if (mov.id === id) {
+
+        if (mov.amount > 0) {
+
+          setCartNum(cartNum - 1);
+
+          mov.amount = mov.amount - 1;
+
+          console.log("Film "+title+" je izbrisan iz korpe.");
+
+        } else {
+
+          alert("Film nema nijednu kartu!");
+
+        }
+
+      }
+
+    });
+
+    refreshCart();
+
+  }
   return (
     <BrowserRouter className="App">
       <NavBar cartNum={cartNum}></NavBar>
       <Routes>
         <Route
           path="/"
-          element={<Movies movies={movies} onAdd={addMovie} />}
+          element={<Movies movies={movies} onAdd={addMovie} onRemove = {remove} />}
         />
         <Route path="/cart" element={<Cart movies={cartMovies} />} />
       </Routes>
