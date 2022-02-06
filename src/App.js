@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Proizvodi from "./components/front/Proizvodi";
 import Korpa from "./components/front/Korpa";
 import { useState } from "react";
+import Login from "./components/front/Login";
 
 function App() {
   const { proizvodi } = data;
@@ -61,6 +62,7 @@ function App() {
             />
           }
         />
+        <Route path="/signup" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
