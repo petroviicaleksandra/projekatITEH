@@ -7,6 +7,8 @@ import Proizvodi from "./components/front/Proizvodi";
 import Korpa from "./components/front/Korpa";
 import { useState } from "react";
 import Login from "./components/front/Login";
+import Register from "./components/front/Register";
+import Filmovi from "./components/front/Filmovi";
 
 function App() {
   const { proizvodi } = data;
@@ -48,6 +50,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/film" element={<Filmovi />} />
         <Route
           path="/"
           element={<Proizvodi pr={proizvodi} dodajProizvod={dodajProizvod} />}
@@ -63,6 +66,7 @@ function App() {
           }
         />
         <Route path="/signup" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );

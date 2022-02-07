@@ -2,8 +2,9 @@ import { useState } from "react";
 import React from "react";
 import axios from "axios";
 
-const Login = () => {
+const Register = () => {
   const [userData, setUserData] = useState({
+    name: "",
     email: "",
     password: "",
   });
@@ -12,7 +13,7 @@ const Login = () => {
     newUserData[e.target.name] = e.target.value;
     setUserData(newUserData);
   }
-  function handleLogin(e) {
+  function handleRegister(e) {
     e.preventDefault();
     console.log("nesto");
   }
@@ -27,13 +28,26 @@ const Login = () => {
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-md-9 col-lg-6 col-xl-5">
             <img
-              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
               className="img-fluid"
               alt="Simple image"
             ></img>
           </div>
           <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleRegister}>
+              <div className="form-outline mb-4">
+                <input
+                  type="name"
+                  id="form3Example2"
+                  className="form-control form-control-lg"
+                  placeholder="Unesite korisnicko ime"
+                  name="name"
+                  onInput={handleInput}
+                ></input>
+                <label className="form-label" htmlFor="form3Example3">
+                  Korisniko ime
+                </label>
+              </div>
               <div className="form-outline mb-4">
                 <input
                   type="email"
@@ -69,14 +83,8 @@ const Login = () => {
                     paddingRight: 2.5 + "rem",
                   }}
                 >
-                  Uloguj se
+                  Registruj se
                 </button>
-                <p className="small fw-bold mt-2 pt-1 mb-0">
-                  Nemas nalog?{" "}
-                  <a href="/register" className="link-danger">
-                    Registruj se
-                  </a>
-                </p>
               </div>
             </form>
           </div>
@@ -86,4 +94,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
