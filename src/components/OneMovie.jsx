@@ -34,7 +34,7 @@ function OneMovie({ movie, onAdd, onRemove, inCart }) {
           </button>
         </>
       ) : (
-        <h4>Amount: {movie.amount}</h4>
+        <h4>Broj karata: {movie.amount}</h4>
       )}
     </div>
   );

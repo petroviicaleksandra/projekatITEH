@@ -4,6 +4,9 @@ import Movies from "./components/Movies";
 import Cart from "./components/Cart";
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Header from "./components/Header";
 
 function App() {
   const [cartNum, setCartNum] = useState(0);
@@ -77,36 +80,20 @@ function App() {
       console.log(mov.amount);
     });
     refreshCart();
-    
   }
   function remove (title,id) {
-
-    console.log("remove");
-
     movies.forEach((mov) => {
-
       if (mov.id === id) {
-
         if (mov.amount > 0) {
-
           setCartNum(cartNum - 1);
-
           mov.amount = mov.amount - 1;
-
           console.log("Film "+title+" je izbrisan iz korpe.");
-
         } else {
-
-          alert("Film nema nijednu kartu!");
-
+          alert("Film "+title+ " nema nijednu kartu!");
         }
-
       }
-
     });
-
     refreshCart();
-
   }
   return (
     <BrowserRouter className="App">
@@ -117,6 +104,8 @@ function App() {
           element={<Movies movies={movies} onAdd={addMovie} onRemove = {remove} />}
         />
         <Route path="/cart" element={<Cart movies={cartMovies} />} />
+        <Route path="/signup" element={<Login />} />
+        <Route path="/register" element={<Register />} />   
       </Routes>
     </BrowserRouter>
   );
