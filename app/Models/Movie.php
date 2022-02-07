@@ -13,6 +13,8 @@ class Movie extends Model
     {
         return $this->hasMany(Ticket::class);
     }
-
-
+    public function genre()
+    {
+        return $this->belongsTo(Genre::class);
+    }
 }
