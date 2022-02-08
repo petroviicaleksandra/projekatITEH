@@ -1,12 +1,14 @@
 import { useState } from "react";
 import React from "react";
-//import axios from "axios";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
   });
+  let navigate = useNavigate();
   function handleInput(e) {
     let newUserData = userData;
     newUserData[e.target.name] = e.target.value;
@@ -14,7 +16,17 @@ const Login = () => {
   }
   function handleLogin(e) {
     e.preventDefault();
-    console.log("nesto");
+    axios
+      .post("http://127.0.0.1:8000/api/login", userData)
+      .then((res) => {
+        console.log(res.data);
+        window.sessionStorage.setItem("auth_token", res.data.access_token);
+        navigate("/");
+      })
+      .catch((e) => {
+        console.log("greska");
+        alert("Proverite korisnicko ime i lozinku");
+      });
   }
   return (
     <section

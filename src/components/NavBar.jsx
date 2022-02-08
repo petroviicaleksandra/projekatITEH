@@ -6,13 +6,12 @@ import Header from "./Header";
 function NavBar({ cartNum }) {
   return (
     <div className="navBar">
-      
       <Link to="/">E-bioskop</Link>
       <Link to="/cart" className="cart-items">
         <BiMoviePlay />
         <p className="cart-num">{cartNum}</p>
       </Link>
-      <Header></Header>
+      <Header labs="Uloguj se"></Header>
     </div>
   );
 }

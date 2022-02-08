@@ -9,21 +9,15 @@ const Header = ({ labs }) => {
       </div>
       <div className="header-links">
         <ul>
-          
-            <Link to="/">Filmovi</Link>
-          
+          <Link to="/">Filmovi</Link>
         </ul>
         <ul>
-          
-            <Link to="/signup">{labs}</Link>
-          
+          <Link to="/signup">{labs}</Link>
         </ul>
         <ul>
-          
-            <Link to="/cart" className="cart">
-              <i class="fas fa-shopping-cart"></i> Korpa
-            </Link>
-          
+          <Link to="/cart" className="cart">
+            <i class="fas fa-shopping-cart"></i> Korpa
+          </Link>
         </ul>
       </div>
     </header>

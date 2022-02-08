@@ -1,6 +1,7 @@
 import { useState } from "react";
 import React from "react";
-//import axios from "axios";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [userData, setUserData] = useState({
@@ -8,6 +9,7 @@ const Register = () => {
     email: "",
     password: "",
   });
+  let navigate = useNavigate();
   function handleInput(e) {
     let newUserData = userData;
     newUserData[e.target.name] = e.target.value;
@@ -15,7 +17,18 @@ const Register = () => {
   }
   function handleRegister(e) {
     e.preventDefault();
-    console.log("nesto");
+    axios
+      .post("http://127.0.0.1:8000/api/register", userData)
+      .then((res) => {
+        console.log(res.data);
+        alert("Uspesna registracija");
+        navigate("/");
+        // window.sessionStorage.setItem("auth_token", res.data.access_token);
+      })
+      .catch((e) => {
+        console.log("greska");
+        alert("Proverite da li ste popunili sva polja");
+      });
   }
   return (
     <section
@@ -42,6 +55,7 @@ const Register = () => {
                   className="form-control form-control-lg"
                   placeholder="Unesite korisnicko ime"
                   name="name"
+                  required
                   onInput={handleInput}
                 ></input>
                 <label className="form-label" htmlFor="form3Example3">
@@ -55,6 +69,7 @@ const Register = () => {
                   className="form-control form-control-lg"
                   placeholder="Unesite email adresu"
                   name="email"
+                  required
                   onInput={handleInput}
                 ></input>
                 <label className="form-label" htmlFor="form3Example3">
@@ -69,6 +84,7 @@ const Register = () => {
                   placeholder="Unesite lozinku"
                   name="password"
                   onInput={handleInput}
+                  required
                 ></input>
                 <label className="form-label" htmlFor="form3Example4">
                   Lozinka
