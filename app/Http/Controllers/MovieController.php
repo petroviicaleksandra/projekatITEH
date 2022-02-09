@@ -16,6 +16,18 @@ class MovieController extends Controller
     public function index()
     {
         $movies = Movie::all();
-        return MovieResource::collection($movies);
+        return response()->json([
+
+            'status' => 200,
+
+            'movies' => $movies
+
+        ]);
     }
+    public function destroy(Movie $movie)
+    {
+        $movie->delete();
+        return response()->json('Movie deleted successfully!');
+    }
+    
 }

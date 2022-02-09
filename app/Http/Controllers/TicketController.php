@@ -22,7 +22,13 @@ class TicketController extends Controller
     public function index()
     {
         $tickets = Ticket::all();
-        return TicketResource::collection($tickets);
+        return response()->json([
+
+            'status' => 200,
+
+            'tickets' => $tickets
+
+        ]);
     }
 
     public function create()
@@ -39,7 +45,7 @@ class TicketController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'id' => 'required|string|max:50',
+            // 'id' => 'required|string|max:50',
             'movie_id' => 'required',
             'user_id' => 'required',
         ]);
@@ -49,7 +55,7 @@ class TicketController extends Controller
         }
 
         $ticket = Ticket::create([
-            'id' => $request->id,
+            // 'id' => $request->id,
             'movie_id' => $request->movie_id,
             'user_id' => Auth::user()->id
         ]);
