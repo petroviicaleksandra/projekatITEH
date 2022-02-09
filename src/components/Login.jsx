@@ -3,7 +3,7 @@ import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ addToken }) => {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -21,6 +21,7 @@ const Login = () => {
       .then((res) => {
         console.log(res.data);
         window.sessionStorage.setItem("auth_token", res.data.access_token);
+        addToken(res.data.access_token);
         navigate("/");
       })
       .catch((e) => {

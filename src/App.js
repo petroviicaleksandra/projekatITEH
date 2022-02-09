@@ -2,13 +2,21 @@ import "./App.css";
 import NavBar from "./components/NavBar";
 import Movies from "./components/Movies";
 import Cart from "./components/Cart";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Header from "./components/Header";
+import Popular from "./components/Popular";
+import Tabela from "./components/Tabela";
+import Tickets from "./components/Tickets";
 
 function App() {
+  const [token, setToken] = useState();
+  function addToken(auth_token) {
+    setToken(auth_token);
+  }
+
   const [cartNum, setCartNum] = useState(0);
   const [cartMovies, setCartMovies] = useState([]);
   const [movies] = useState([
@@ -97,10 +105,24 @@ function App() {
     refreshCart();
   }
   let labs = "Uloguj se";
+  //popularno
+  const FEATURED_API =
+    "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=1";
+
+  const [popular, setPopular] = useState([]);
+
+  useEffect(() => {
+    fetch(FEATURED_API)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setPopular(data.results);
+      });
+  }, []);
 
   return (
     <BrowserRouter className="App">
-      <NavBar cartNum={cartNum}></NavBar>
+      <NavBar cartNum={cartNum} token={token}></NavBar>
       <Routes>
         <Route
           path="/"
@@ -114,8 +136,11 @@ function App() {
           }
         />
         <Route path="/cart" element={<Cart movies={cartMovies} />} />
-        <Route path="/signup" element={<Login />} />
+        <Route path="/signup" element={<Login addToken={addToken} />} />
+        <Route path="/popular" element={<Popular popular={popular} />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/tabela" element={<Tabela />} />
+        <Route path="/tickets" element={<Tickets />} />
       </Routes>
     </BrowserRouter>
   );
