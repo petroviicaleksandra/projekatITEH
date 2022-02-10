@@ -52,7 +52,7 @@ function OneMovie({ movie, onAdd, onRemove, inCart }) {
   function handleRemove(movie_id) {
     var config = {
       method: "delete",
-      url: "http://127.0.0.1:8000/api/ticket/" + movie_id,
+      url: "http://127.0.0.1:8000/api/tickets/" + movie_id,
       headers: {
         Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
       },

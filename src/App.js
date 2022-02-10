@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import Popular from "./components/Popular";
 import Tabela from "./components/Tabela";
 import Tickets from "./components/Tickets";
+import axios from "axios";
 
 function App() {
   const [token, setToken] = useState();
@@ -119,10 +120,31 @@ function App() {
         setPopular(data.results);
       });
   }, []);
+  //uloge
+  let ulog = "";
+  function uloge() {
+    var config = {
+      method: "get",
+      url: "http://127.0.0.1:8000/api/getRole",
+      headers: {
+        Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
+      },
+      // data : data
+    };
 
+    axios(config)
+      .then(function (response) {
+        ulog = response.data;
+        console.log("Ulogovani je" + response.data);
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
   return (
     <BrowserRouter className="App">
-      <NavBar cartNum={cartNum} token={token}></NavBar>
+      <NavBar cartNum={cartNum} token={token} ulog={ulog}></NavBar>
       <Routes>
         <Route
           path="/"
@@ -136,7 +158,10 @@ function App() {
           }
         />
         <Route path="/cart" element={<Cart movies={cartMovies} />} />
-        <Route path="/signup" element={<Login addToken={addToken} />} />
+        <Route
+          path="/signup"
+          element={<Login addToken={addToken} uloge={uloge} />}
+        />
         <Route path="/popular" element={<Popular popular={popular} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/tabela" element={<Tabela />} />

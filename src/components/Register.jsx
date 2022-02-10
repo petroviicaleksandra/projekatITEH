@@ -90,6 +90,20 @@ const Register = () => {
                   Lozinka
                 </label>
               </div>
+              <div className="form-outline mb-3">
+                <input
+                  type="text"
+                  id="form3Example5"
+                  className="form-control form-control-lg"
+                  placeholder="Vasa uloga je"
+                  name="role"
+                  onInput={handleInput}
+                  required
+                ></input>
+                <label className="form-label" htmlFor="form3Example5">
+                  Uloga
+                </label>
+              </div>
               <div className="text-center text-lg-start mt-4 pt-2">
                 <button
                   type="submit"
