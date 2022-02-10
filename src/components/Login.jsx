@@ -21,7 +21,7 @@ const Login = ({ addToken }) => {
       .then((res) => {
         console.log(res.data);
         window.sessionStorage.setItem("auth_token", res.data.access_token);
-        addToken(res.data.access_token);
+        // addToken(res.data.access_token);
         navigate("/");
       })
       .catch((e) => {

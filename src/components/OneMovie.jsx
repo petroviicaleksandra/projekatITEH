@@ -30,27 +30,44 @@ function OneMovie({ movie, onAdd, onRemove, inCart }) {
   //       alert("Proverite da li ste popunili sva polja");
   //     });
   // }
-  function handleTicekt(movie) {
-    const id = axios.get("http://127.0.0.1:8000/api/getId");
+  // function getId() {
+  //   var config = {
+  //     method: "get",
+  //     url: "http://127.0.0.1:8000/api/getId",
+  //     headers: {
+  //       Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
+  //     },
+  //   };
 
-    let newTicket = {
-      movie_id: movie,
-      user_id: id,
+  //   axios(config)
+  //     .then(function (response) {
+  //       console.log(JSON.stringify(response.data));
+  //       return response.data;
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // }
+  function handleTicekt(movieId) {
+    var data = JSON.stringify({
+      movie_id: movieId,
+    });
+    var config = {
+      method: "post",
+      url: "http://127.0.0.1:8000/api/ticket",
+      headers: {
+        Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
+        "Content-Type": "application/json",
+      },
+      data: data,
     };
 
-    setTicketData(newTicket);
-
-    axios
-      .post("http://127.0.0.1:8000/api/ticket", ticketData)
-      .then((res) => {
-        console.log(res.data);
-        alert("Uspesna dodato u bazu");
-
-        // window.sessionStorage.setItem("auth_token", res.data.access_token);
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
       })
-      .catch((e) => {
-        console.log("greska");
-        alert("Neuspesna kupovina karte");
+      .catch(function (error) {
+        console.log(error);
       });
   }
   return (
@@ -69,8 +86,10 @@ function OneMovie({ movie, onAdd, onRemove, inCart }) {
         <>
           <button
             className="btn"
-            onClick={() => onAdd(movie.title, movie.id)}
-            onClick={() => handleTicekt(movie.id)}
+            onClick={() => {
+              onAdd(movie.title, movie.id);
+              handleTicekt(movie.id);
+            }}
           >
             <TiPlus />
           </button>
