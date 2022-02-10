@@ -48,7 +48,27 @@ function OneMovie({ movie, onAdd, onRemove, inCart }) {
   //       console.log(error);
   //     });
   // }
-  function handleTicekt(movieId) {
+
+  function handleRemove(movie_id) {
+    var config = {
+      method: "delete",
+      url: "http://127.0.0.1:8000/api/ticket/" + movie_id,
+      headers: {
+        Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
+      },
+      // data : data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  function handleTicket(movieId) {
     var data = JSON.stringify({
       movie_id: movieId,
     });
@@ -88,14 +108,17 @@ function OneMovie({ movie, onAdd, onRemove, inCart }) {
             className="btn"
             onClick={() => {
               onAdd(movie.title, movie.id);
-              handleTicekt(movie.id);
+              handleTicket(movie.id);
             }}
           >
             <TiPlus />
           </button>
           <button
             className="btn"
-            onClick={() => onRemove(movie.title, movie.id)}
+            onClick={() => {
+              onRemove(movie.title, movie.id);
+              handleRemove(movie.id);
+            }}
           >
             <TiMinus />
           </button>
