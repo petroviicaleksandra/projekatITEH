@@ -1,7 +1,72 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { useState } from "react";
 
 class DatabaseMovies extends Component {
+  handleClick() {
+    var tabela, redovi, switching, i, x, y, zaZamenu;
+    tabela = document.getElementById("myTable");
+    switching = true;
+
+    while (switching) {
+      switching = false;
+      redovi = tabela.rows;
+      for (i = 1; i < redovi.length - 1; i++) {
+        zaZamenu = false;
+        x = redovi[i].getElementsByTagName("TD")[3];
+        y = redovi[i + 1].getElementsByTagName("TD")[3];
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          zaZamenu = true;
+          break;
+        }
+      }
+      if (zaZamenu) {
+        redovi[i].parentNode.insertBefore(redovi[i + 1], redovi[i]);
+        switching = true;
+      }
+    }
+  }
+  handleClick2() {
+    var tabela, redovi, switching, i, x, y, zaZamenu;
+    tabela = document.getElementById("myTable");
+    switching = true;
+
+    while (switching) {
+      switching = false;
+      redovi = tabela.rows;
+      for (i = 1; i < redovi.length - 1; i++) {
+        zaZamenu = false;
+        x = redovi[i].getElementsByTagName("TD")[0];
+        y = redovi[i + 1].getElementsByTagName("TD")[0];
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          zaZamenu = true;
+          break;
+        }
+      }
+      if (zaZamenu) {
+        redovi[i].parentNode.insertBefore(redovi[i + 1], redovi[i]);
+        switching = true;
+      }
+    }
+  }
+  handleClick3() {
+    var input, filter, tabela, tr, polje, i, vrednost;
+    input = document.getElementById("pretraga");
+    filter = input.value.toUpperCase();
+    tabela = document.getElementById("myTable");
+    tr = tabela.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      polje = tr[i].getElementsByTagName("td")[1];
+      if (polje) {
+        vrednost = polje.textContent || polje.innerText;
+        if (vrednost.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
   state = {
     movies: [],
     loading: true,
@@ -54,8 +119,19 @@ class DatabaseMovies extends Component {
       //   </div>
       //   <div className="card-body">
       <>
+        <input id="pretraga" type="text" placeholder="Pretrazi.." />
+        <button
+          id="btn-sortiraj"
+          class="btn btn-normal"
+          onClick={() => this.handleClick3()}
+        >
+          Pretrazi po nazivu
+        </button>
         <h4> Filmovi u bazi</h4>
-        <table className="table table-striped table-sm table-bordered">
+        <table
+          id="myTable"
+          className="table table-striped table-sm table-bordered"
+        >
           <thead>
             <tr className="text-center text-secondary">
               <th>ID</th>
@@ -66,6 +142,20 @@ class DatabaseMovies extends Component {
           </thead>
           <tbody>{movie_HTML_TABLE}</tbody>
         </table>
+        <button
+          id="btn-sortiraj"
+          class="btn btn-normal"
+          onClick={() => this.handleClick()}
+        >
+          Sortiraj po zanru
+        </button>
+        <button
+          id="btn-sortiraj"
+          class="btn btn-normal"
+          onClick={() => this.handleClick2()}
+        >
+          Sortiraj po id
+        </button>
       </>
       //   </div>
       //         </div>
