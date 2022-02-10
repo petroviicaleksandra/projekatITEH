@@ -19,7 +19,7 @@ class TicketResource extends JsonResource
         return [
             'id' => $this->resource->id,
             'user'=> $this->resource->user_id,
-            'genre_id'=> $this->resource->genre_id
+            'movie_id'=> $this->resource->movie_id
         ];
     }
 }

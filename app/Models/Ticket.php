@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['movie_id','user_id'];
+
     public function movies()
     {
         return $this->belongsTo(Movie::class);

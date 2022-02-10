@@ -70,6 +70,11 @@ class AuthController extends Controller
         $id = Auth::id();
         return $id;
     }
+    public function getRole(){
+        $role = Auth::user()->role;
+        // $role = $request->role;
+        return $role;
+    }
     
     
 }

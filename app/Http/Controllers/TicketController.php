@@ -45,9 +45,9 @@ class TicketController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            // 'id' => 'required|string|max:50',
-            'movie_id' => 'required',
-            'user_id' => 'required',
+
+            'movie_id' => '',
+            'user_id' => '',
         ]);
 
         if ($validator->fails()) {
@@ -55,7 +55,7 @@ class TicketController extends Controller
         }
 
         $ticket = Ticket::create([
-            // 'id' => $request->id,
+
             'movie_id' => $request->movie_id,
             'user_id' => Auth::user()->id
         ]);
@@ -86,7 +86,7 @@ class TicketController extends Controller
     public function update(Request $request, Ticket $ticket)
     {
         $validator = Validator::make($request->all(), [
-            'id' => 'required|string|max:50',
+
             'movie_id' => 'required',
             'user_id' => 'required',
         ]);
@@ -95,7 +95,7 @@ class TicketController extends Controller
             return response()->json($validator->errors());
         }
 
-        $ticket->id = $request->id;
+
         $ticket->movie_id = $request->movie_id;
         $ticket->user_id = $request->user_id;
         $ticket->save();

@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\MovieTicketController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserTicketController;
 use Illuminate\Http\Request;
@@ -39,4 +40,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::resource('ticket', TicketController::class)->only(['update', 'store', 'destroy']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/getId', [AuthController::class, 'getId']);
+    Route::get('/getRole', [AuthController::class, 'getRole']);
+    Route::get('/tickets', [TicketController::class, 'index']);
+    Route::delete('/tickets/{id}', [MovieTicketController::class, 'destroy']);
+
 });
