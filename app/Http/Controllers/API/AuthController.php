@@ -18,7 +18,8 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|max:255|email|unique:users',
-            'password' => 'required|string|min:8'
+            'password' => 'required|string|min:8',
+            'role' => 'required|string'
         ]);
 
 
@@ -29,6 +30,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $request->role,
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
@@ -59,23 +61,23 @@ class AuthController extends Controller
     //         'message' => 'You have successfully logged out and the token was successfully deleted'
     //     ];
     // }
-    public function logout() {
-        Auth::user()->tokens->each(function($token, $key) {
+    public function logout()
+    {
+        Auth::user()->tokens->each(function ($token, $key) {
             $token->delete();
         });
-    
+
         return response()->json('Successfully logged out');
     }
-    public function getId(){
+    public function getId()
+    {
         $id = Auth::id();
         return $id;
     }
-    public function getRole(){
+    public function getRole()
+    {
         $role = Auth::user()->role;
         // $role = $request->role;
         return $role;
     }
-    
-    
 }
-
