@@ -32,6 +32,7 @@ Route::get('/users/{id}/tickets', [UserTicketController::class, 'index'])->name(
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/tickets', [TicketController::class, 'index']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', function (request $request) {
@@ -41,7 +42,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/getId', [AuthController::class, 'getId']);
     Route::get('/getRole', [AuthController::class, 'getRole']);
-    Route::get('/tickets', [TicketController::class, 'index']);
-    Route::delete('/tickets/{id}', [MovieTicketController::class, 'destroy']);
+    
+    Route::delete('/tickets/{movie_id}', [MovieTicketController::class, 'destroy']);
 
 });
