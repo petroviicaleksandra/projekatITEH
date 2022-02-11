@@ -20,10 +20,10 @@ const Login = ({ addToken, uloge }) => {
     axios
       .post("http://127.0.0.1:8000/api/login", userData)
       .then((res) => {
-        uloge();
         console.log(res.data);
         window.sessionStorage.setItem("auth_token", res.data.access_token);
-        // addToken(res.data.access_token);
+        uloge();
+        addToken(res.data.access_token);
         navigate("/");
       })
       .catch((e) => {

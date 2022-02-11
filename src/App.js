@@ -121,7 +121,8 @@ function App() {
       });
   }, []);
   //uloge
-  let ulog = "";
+  const [role, setRole] = useState("");
+
   function uloge() {
     var config = {
       method: "get",
@@ -134,8 +135,8 @@ function App() {
 
     axios(config)
       .then(function (response) {
-        ulog = response.data;
-        console.log("Ulogovani je" + response.data);
+        setRole(response.data);
+        console.log(response.data);
         console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
@@ -144,7 +145,7 @@ function App() {
   }
   return (
     <BrowserRouter className="App">
-      <NavBar cartNum={cartNum} token={token} ulog={ulog}></NavBar>
+      <NavBar cartNum={cartNum} token={token} role={role}></NavBar>
       <Routes>
         <Route
           path="/"

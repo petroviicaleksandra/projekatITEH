@@ -25,7 +25,7 @@ function handleIzloguj() {
     });
 }
 
-function NavBar({ cartNum, token, ulog }) {
+function NavBar({ cartNum, token, role }) {
   return (
     <div className="navBar">
       <h1>Role</h1>
@@ -45,13 +45,13 @@ function NavBar({ cartNum, token, ulog }) {
         </a>
         // <Header labs="Izloguj se" onclick={handleIzloguj}></Header>
       )}
-      {ulog == "admin" ? (
+      {role == "admin" ? (
         <>
           <Link to="/tabela">Prikaz</Link>
           <Link to="/tickets">Kupljeno</Link>{" "}
         </>
       ) : (
-        ""
+        "User"
       )}
     </div>
   );
