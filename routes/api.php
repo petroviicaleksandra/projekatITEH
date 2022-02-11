@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\MovieTicketController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserTicketController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -42,7 +44,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/getId', [AuthController::class, 'getId']);
     Route::get('/getRole', [AuthController::class, 'getRole']);
-    
-    Route::delete('/tickets/{movie_id}', [MovieTicketController::class, 'destroy']);
 
+    Route::delete('/tickets/{movie_id}', [MovieTicketController::class, 'destroy']);
 });

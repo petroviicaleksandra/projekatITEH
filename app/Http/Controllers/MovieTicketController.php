@@ -13,7 +13,7 @@ class MovieTicketController extends Controller
     public function destroy($movie_id)
     {   
         $user_id = Auth::user()->id;
-        DB::table('tickets')->where('movie_id',$movie_id)->where('user_id',$user_id)->first()->delete();
+        DB::table('tickets')->where('movie_id',$movie_id)->where('user_id',$user_id)->delete();
         // $ticket = Ticket::find(Ticket::where('movie_id','=', $movie_id));
         // // $ticket = Ticket::get()->where('movie_id', $movie_id);
         // $ticket->delete();
