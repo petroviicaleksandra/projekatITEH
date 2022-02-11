@@ -54,21 +54,21 @@ class AuthController extends Controller
         return response()
             ->json(['message' => 'Hi ' . $user->name . ', welcome to home', 'access_token' => $token, 'token_type' => 'Bearer',]);
     }
-    // public function logout()
-    // {
-    //     auth()->user()->tokens()->delete();
-    //     return [
-    //         'message' => 'You have successfully logged out and the token was successfully deleted'
-    //     ];
-    // }
     public function logout()
     {
-        Auth::user()->tokens->each(function ($token, $key) {
-            $token->delete();
-        });
-
-        return response()->json('Successfully logged out');
+        auth()->user()->tokens()->delete();
+        return [
+            'message' => 'You have successfully logged out and the token was successfully deleted'
+        ];
     }
+    // public function logout()
+    // {
+    //     Auth::user()->tokens->each(function ($token, $key) {
+    //         $token->delete();
+    //     });
+
+    //     return response()->json('Successfully logged out');
+    // }
     public function getId()
     {
         $id = Auth::id();
@@ -78,6 +78,12 @@ class AuthController extends Controller
     {
         $role = Auth::user()->role;
         // $role = $request->role;
-        return $role;
+        return response()->json([
+
+            // 'status' => 200,
+
+            'role' => $role
+
+        ]);
     }
 }
