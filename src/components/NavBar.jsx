@@ -27,7 +27,9 @@ function handleIzloguj() {
 function NavBar({ cartNum, token, role }) {
   return (
     <div className="navBar">
-      {/* <h1>Role</h1> */}
+      <div>
+        <h1 className="logo">ONLINE-BIOSKOP</h1>
+      </div>
       <Link to="/">E-bioskop</Link>
       <Link to="/cart" className="cart-items">
         <BiMoviePlay />

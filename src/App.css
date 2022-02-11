@@ -15,9 +15,10 @@
   border-bottom-width: 2px;
   border-bottom-color: rgb(175, 175, 175);
   align-items: center;
-  min-height: 40px;
+  min-height: 50px;
   padding-left: 25px;
   font-size: x-large;
+  margin-bottom: 10px;
   justify-content: space-between;
 }
 
@@ -116,4 +117,8 @@ a {
   left: 0;
   right: 0;
   top: 0;
+}
+.buttons {
+  display: flex;
+  direction: inherit;
 }

@@ -104,24 +104,26 @@ function OneMovie({ movie, onAdd, onRemove, inCart }) {
       </div>
       {inCart === 1 ? (
         <>
-          <button
-            className="btn"
-            onClick={() => {
-              onAdd(movie.title, movie.id);
-              handleTicket(movie.id);
-            }}
-          >
-            <TiPlus />
-          </button>
-          <button
-            className="btn"
-            onClick={() => {
-              onRemove(movie.title, movie.id);
-              handleRemove(movie.id);
-            }}
-          >
-            <TiMinus />
-          </button>
+          <div className="buttons">
+            <button
+              className="btn"
+              onClick={() => {
+                onAdd(movie.title, movie.id);
+                handleTicket(movie.id);
+              }}
+            >
+              <TiPlus />
+            </button>
+            <button
+              className="btn"
+              onClick={() => {
+                onRemove(movie.title, movie.id);
+                handleRemove(movie.id);
+              }}
+            >
+              <TiMinus />
+            </button>
+          </div>
         </>
       ) : (
         <h4>Broj karata: {movie.amount}</h4>
