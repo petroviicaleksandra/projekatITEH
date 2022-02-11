@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Header from "./components/Header";
 import Popular from "./components/Popular";
 import Tabela from "./components/Tabela";
 import Tickets from "./components/Tickets";
@@ -135,14 +134,15 @@ function App() {
 
     axios(config)
       .then(function (response) {
-        setRole(response.data);
-        console.log(response.data);
-        console.log(JSON.stringify(response.data));
+        setRole(response.data.role);
+        console.log(response.data.role);
+        console.log(JSON.stringify(response.data.role));
       })
       .catch(function (error) {
         console.log(error);
       });
   }
+  console.log(role);
   return (
     <BrowserRouter className="App">
       <NavBar cartNum={cartNum} token={token} role={role}></NavBar>

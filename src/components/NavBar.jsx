@@ -1,7 +1,6 @@
 import React from "react";
 import { BiMoviePlay } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import Header from "./Header";
 import axios from "axios";
 import { useState } from "react";
 
@@ -28,14 +27,14 @@ function handleIzloguj() {
 function NavBar({ cartNum, token, role }) {
   return (
     <div className="navBar">
-      <h1>Role</h1>
+      {/* <h1>Role</h1> */}
       <Link to="/">E-bioskop</Link>
       <Link to="/cart" className="cart-items">
         <BiMoviePlay />
         <p className="cart-num">{cartNum}</p>
       </Link>
       <Link to="/popular">Popularno</Link>
-      {window.sessionStorage.getItem("auth_token") == null ? (
+      {token == null ? (
         <a class="nav-bar" href="/signup">
           Uloguj se
         </a>
@@ -49,9 +48,17 @@ function NavBar({ cartNum, token, role }) {
         <>
           <Link to="/tabela">Prikaz</Link>
           <Link to="/tickets">Kupljeno</Link>{" "}
+          <h4 className="ulogovan">Ulogovan je: admin</h4>
         </>
       ) : (
-        "User"
+        ""
+      )}
+      {role == "user" ? (
+        <>
+          <h4 className="ulogovan">Ulogovan je: user</h4>
+        </>
+      ) : (
+        ""
       )}
     </div>
   );

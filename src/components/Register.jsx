@@ -8,6 +8,7 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
+    role: "",
   });
   let navigate = useNavigate();
   function handleInput(e) {
