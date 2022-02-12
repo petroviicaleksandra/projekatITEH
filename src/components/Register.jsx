@@ -23,7 +23,7 @@ const Register = () => {
       .then((res) => {
         console.log(res.data);
         alert("Uspesna registracija");
-        navigate("/");
+        navigate("/signup");
         // window.sessionStorage.setItem("auth_token", res.data.access_token);
       })
       .catch((e) => {
